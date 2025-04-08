@@ -56,7 +56,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
-  padding: 0 1rem;
+  margin-inline: auto;
 }
 .input-group{
   display: flex;

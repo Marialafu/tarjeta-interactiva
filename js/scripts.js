@@ -14,15 +14,19 @@ const numbers = '0123456789'
 
 
 const validName = () => {
-    if (numbers.includes(cardNameInputElement.value)){
-        return false
+    for (const letter of cardNameInputElement.value){
+        numbers.includes(letter)
+        console.log('no valido');
+        break
     }
+
 }
 
 
 const validateForm = (event) => {
     event.preventDefault()
-    console.log(validName());
+    validName()
+    
     
 
 }
