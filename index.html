@@ -3,10 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Validar tarjeta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
+    <main class="main">
+      <!-- <picture >
+        <source media="(min-width: 1440px)" srcset="assets/images/bg-main-desktop.png">
+        <source media="(min-width: 375px)" srcset="assets/images/bg-main-mobile.png">
+        <img src="assets/images/bg-main-mobile.png" alt="degradado de fondo">
+      </picture> -->
+
+      <section class="cards">
+        <section class="card-back">
+          <span class="typography cvc-card-text" id="cvc-card-back">000</span>
+        </section>
+        <section class="card-front">
+          <img src="assets/images/card-logo.svg" alt="" class="card-logo">
+          <span class="typography number-card-text" id="number-card-front">0000 0000 0000 0000</span>
+          <div class="bottom-card-front-text">
+            <span class="typography" id="name-card-front">JANE APPLESEED</span>
+            <span class="typography" id="date-card-front">00/00</span>
+          </div>
+        </section>
+        
+      </section>
+
+      <form id="form" class="form-class">
+        <div class="input-group">
+          <label for="card-name" class="typography label-text">CARDHOLDER NAME</label>
+          <input type="text" class="typography input-text input" id="card-name" placeholder="e.g Jane Appleseed" >
+        </div>
+        <div class="input-group">
+          <label for="card-number" class="typography label-text">CARD NUMBER</label>
+          <input type="text" class="typography input-text input" id="card-number" placeholder="e.g 1234 5678 9123 0000">
+        </div>
+        <section class="cvc-and-date">
+          <div class="input-group-s">
+            <label for="mm-date yy-date" class="typography label-text">Exp. Date (MM/YY)</label>
+            <div class="date-input">
+              <input type="text" class="typography input-text date-input input" id="mm-date" placeholder="MM">
+              <input type="text" class="typography input-text date-input input" id="yy-date"  placeholder="YY">
+            </div>
+          </div>
+          <div class="input-group-s cvc-input">
+            <label for="cvc" class="typography label-text">CVC</label>
+            <input type="text" class="typography input-text input" id="cvc" placeholder="e.g 123">
+          </div>
+        </section>
+        <div>
+          <input type="submit" id="confirm-button" class="confirm-button typography">
+        </div>
+      </form>
+
+    </main>
     <script src="./js/scripts.js"></script>
   </body>
 </html>
