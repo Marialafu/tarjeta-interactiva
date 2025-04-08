@@ -11,22 +11,47 @@ confirmButtonElement.value = 'Confirm'
 
 const letters = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 const numbers = '0123456789'
+const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09']
 
 
-const validName = () => {
-    for (const letter of cardNameInputElement.value){
-        numbers.includes(letter)
-        console.log('no valido');
-        break
+const invalidCardName = () => {
+    for (const letter of cardNameInputElement.value.toUpperCase()){
+        if (numbers.includes(letter)){
+          return false
+        }
     }
+}
 
+const invalidCardNumber = () => {
+    for (const letter of cardNumberInputElement.value){
+        if (letters.includes(letter) || letters.toLowerCase().includes(letter)){
+          return false
+        }
+    }
+}
+const validMonth = () => {
+    for (const month of months){
+        if (cardMMInputElement.value.includes(month)){
+            return true
+        } else {return false}
+    }
 }
 
 
 const validateForm = (event) => {
     event.preventDefault()
-    validName()
     
+    if (invalidCardName() === false){
+        cardNameInputElement.classList.toggle('invalid-input')
+    }
+    //como se añade un texto
+    if (invalidCardNumber() === false){
+        cardNumberInputElement.classList.toggle('invalid-input')
+    }
+
+    if (validMonth() === false){
+        cardMMInputElement.classList.toggle('invalid-input')
+    }
     
 
 }
