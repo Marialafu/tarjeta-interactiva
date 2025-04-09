@@ -40,7 +40,7 @@ body {
 .main{
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 65px;
 }
 .label-text{
   color: var(--primary-color);
@@ -81,6 +81,9 @@ body {
   flex-direction: column;
   justify-content: space-around;
   padding: 1.1rem 1.1875rem 19px 19px;
+  position: relative;
+  left: -30px;
+  top: 40px;
 }
 .card-logo{
   width: 3.125rem;
@@ -102,19 +105,21 @@ body {
   background-image: url(../assets/images/bg-main-mobile.png);
   background-repeat: no-repeat;
   background-size: cover;
-  justify-content: space-around;
   align-items: center;
-  padding: 16px;
+  box-shadow: 0px 36px 50px 0 rgba(0, 0, 0, 0.14)
 }
 .card-back{
   background-image: url(../assets/images/bg-card-back.png);
   width: 17.875rem;
   height: 9.8125rem;
   border-radius: var(--border-radius);
-  position: relative;
   display: flex;
   justify-content: end;
   padding: 1.1rem 1.1875rem 1.1875rem 1.1875rem;
+  position: relative;
+  top: 70px;
+  right: -5px;
+
 }
 
 .confirm-button{
@@ -164,4 +169,28 @@ body {
 
 .hide{
   display: none;
+}
+
+@media screen and (min-width: 1000px) {
+  .main{
+    flex-direction: row;
+    gap: 10px;
+    margin-inline: auto;
+    height: 100vh;
+  }
+  .cards{
+    background-image: url(../assets/images/bg-main-desktop.png);
+    background-size: cover;
+    justify-content: center;
+    box-shadow: 36px 0px 60px 0 rgba(0, 0, 0, 0.14);
+  }
+  .card-back{
+    padding: 1.1rem 1.1875rem 1.1875rem 1.1875rem;
+    left: 150px;
+    top: 170px;
+  }
+  .card-front{
+    top: -180px;
+    left: 100px;
+  }
 }

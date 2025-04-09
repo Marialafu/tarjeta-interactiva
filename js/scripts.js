@@ -30,7 +30,7 @@ const invalidCardName = () => {
   } else if (cardNameInputElement.value === '') {
     cardNameInputElement.classList.add('invalid-input');
     errorName.classList.remove('hide');
-    errorName.textContent = "Can't be blank";
+    errorName.textContent = "*Can't be blank";
   } else {
     cardNameInputElement.classList.add('invalid-input');
     errorName.classList.remove('hide');
@@ -46,7 +46,7 @@ const invalidCardNumber = () => {
   } else if (cardNumberInputElement.value === '') {
     cardNumberInputElement.classList.add('invalid-input');
     errorNumber.classList.remove('hide');
-    errorNumber.textContent = "Can't be blank";
+    errorNumber.textContent = "*Can't be blank";
   } else {
     cardNumberInputElement.classList.remove('invalid-input');
     errorNumber.classList.add('hide');
@@ -59,7 +59,7 @@ const validMonth = () => {
   } else if (cardMMInputElement.value === '') {
     cardMMInputElement.classList.add('invalid-input');
     errorMonth.classList.remove('hide');
-    errorMonth.textContent = "Can't be blank";
+    errorMonth.textContent = "*Can't be blank";
   } else {
     cardMMInputElement.classList.add('invalid-input');
     errorMonth.classList.remove('hide');
@@ -74,7 +74,7 @@ const invalidCVC = () => {
   } else if (cardCVCInputElement.value === '') {
     cardCVCInputElement.classList.add('invalid-input');
     errorCVC.classList.remove('hide');
-    errorCVC.textContent = "Can't be blank";
+    errorCVC.textContent = "*Can't be blank";
   } else {
     cardCVCInputElement.classList.remove('invalid-input');
     errorCVC.classList.add('hide');
@@ -91,12 +91,43 @@ const validateForm = event => {
 formElement.addEventListener('submit', validateForm);
 
 const putCardName = () => {
-  nameCard.textContent = cardNameInputElement.value.toUpperCase();
+  if (cardNameInputElement.value === ''){
+    nameCard.textContent = 'JANE APPLESEED'
+  } else {
+    nameCard.textContent = cardNameInputElement.value.toUpperCase();
+  }
+  
 };
 cardNameInputElement.addEventListener('input', putCardName);
 
 const putCardNumber = () => {
-  //como poner algo cuando está vacío
-  numberCard.textContent = cardNumberInputElement.value;
+  if (cardNumberInputElement.value === ''){
+    numberCard.textContent = '0000 0000 0000 0000'
+  } else {numberCard.textContent = cardNumberInputElement.value;}
+  
 };
 cardNumberInputElement.addEventListener('input', putCardNumber);
+
+const putCVCNumber = () => {
+  if (cardCVCInputElement.value === ''){
+    cvcCard.textContent = '000'
+  } else {
+    cvcCard.textContent = cardCVCInputElement.value;
+  }
+};
+cardCVCInputElement.addEventListener('input', putCVCNumber);
+
+const putMMYYNumber = () => {
+  if (cardMMInputElement.value === '' && cardYYInputElement.value === ''){
+    dateCard.textContent = `00/00`
+  } else if (cardMMInputElement.value === ''){
+    dateCard.textContent = `00/${cardYYInputElement.value}`
+  } else if (cardYYInputElement.value === ''){
+    dateCard.textContent = `${cardMMInputElement.value}/00`
+  } else {
+    dateCard.textContent = `${cardMMInputElement.value}/${cardYYInputElement.value}`
+  }
+  
+};
+cardMMInputElement.addEventListener('input', putMMYYNumber);
+cardYYInputElement.addEventListener('input', putMMYYNumber);
