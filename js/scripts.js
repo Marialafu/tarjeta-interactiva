@@ -1,58 +1,102 @@
-const formElement = document.getElementById('form')
-const confirmButtonElement = document.getElementById('confirm-button')
+const formElement = document.getElementById('form');
+const confirmButtonElement = document.getElementById('confirm-button');
 
-const cardNameInputElement = document.getElementById('card-name')
-const cardNumberInputElement = document.getElementById('card-number')
-const cardMMInputElement = document.getElementById('mm-date')
-const cardYYInputElement = document.getElementById('yy-date')
-const cardCVCInputElement = document.getElementById('cvc')
+const cardNameInputElement = document.getElementById('card-name');
+const cardNumberInputElement = document.getElementById('card-number');
+const cardMMInputElement = document.getElementById('mm-date');
+const cardYYInputElement = document.getElementById('yy-date');
+const cardCVCInputElement = document.getElementById('cvc');
 
-confirmButtonElement.value = 'Confirm'
+const errorName = document.getElementById('error-name');
+const errorNumber = document.getElementById('error-number');
+const errorMonth = document.getElementById('error-month');
+const errorCVC = document.getElementById('error-cvc');
 
-const letters = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
-const numbers = '0123456789'
-const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09']
+const numberCard = document.getElementById('number-card-front');
+const cvcCard = document.getElementById('cvc-card-back');
+const dateCard = document.getElementById('date-card-front');
+const nameCard = document.getElementById('name-card-front');
 
+confirmButtonElement.value = 'Confirm';
+
+const letters = /[a-zA-Z]/;
+const numbers = /\d+/;
+const months = /^(0[1-9]|1[0-2])$/;
 
 const invalidCardName = () => {
-    for (const letter of cardNameInputElement.value.toUpperCase()){
-        if (numbers.includes(letter)){
-          return false
-        }
-    }
-}
+  if (letters.test(cardNameInputElement.value)) {
+    cardNameInputElement.classList.remove('invalid-input');
+    errorName.classList.add('hide');
+  } else if (cardNameInputElement.value === '') {
+    cardNameInputElement.classList.add('invalid-input');
+    errorName.classList.remove('hide');
+    errorName.textContent = "Can't be blank";
+  } else {
+    cardNameInputElement.classList.add('invalid-input');
+    errorName.classList.remove('hide');
+    errorName.textContent = '*Wrong message. No numbers allowed.';
+  }
+};
 
 const invalidCardNumber = () => {
-    for (const letter of cardNumberInputElement.value){
-        if (letters.includes(letter) || letters.toLowerCase().includes(letter)){
-          return false
-        }
-    }
-}
+  if (letters.test(cardNumberInputElement.value)) {
+    cardNumberInputElement.classList.add('invalid-input');
+    errorNumber.classList.remove('hide');
+    errorNumber.textContent = '*Wrong message. No letters allowed.';
+  } else if (cardNumberInputElement.value === '') {
+    cardNumberInputElement.classList.add('invalid-input');
+    errorNumber.classList.remove('hide');
+    errorNumber.textContent = "Can't be blank";
+  } else {
+    cardNumberInputElement.classList.remove('invalid-input');
+    errorNumber.classList.add('hide');
+  }
+};
 const validMonth = () => {
-    for (const month of months){
-        if (cardMMInputElement.value.includes(month)){
-            return true
-        } else {return false}
-    }
-}
+  if (months.test(cardMMInputElement.value)) {
+    cardMMInputElement.classList.remove('invalid-input');
+    errorMonth.classList.add('hide');
+  } else if (cardMMInputElement.value === '') {
+    cardMMInputElement.classList.add('invalid-input');
+    errorMonth.classList.remove('hide');
+    errorMonth.textContent = "Can't be blank";
+  } else {
+    cardMMInputElement.classList.add('invalid-input');
+    errorMonth.classList.remove('hide');
+    errorMonth.textContent = '*Wrong message. Need valid month.';
+  }
+};
+const invalidCVC = () => {
+  if (letters.test(cardCVCInputElement.value)) {
+    cardCVCInputElement.classList.add('invalid-input');
+    errorCVC.classList.remove('hide');
+    errorCVC.textContent = '*Wrong message. No letters allowed.';
+  } else if (cardCVCInputElement.value === '') {
+    cardCVCInputElement.classList.add('invalid-input');
+    errorCVC.classList.remove('hide');
+    errorCVC.textContent = "Can't be blank";
+  } else {
+    cardCVCInputElement.classList.remove('invalid-input');
+    errorCVC.classList.add('hide');
+  }
+};
 
+const validateForm = event => {
+  event.preventDefault();
+  invalidCardName();
+  invalidCardNumber();
+  validMonth();
+  invalidCVC();
+};
+formElement.addEventListener('submit', validateForm);
 
-const validateForm = (event) => {
-    event.preventDefault()
-    
-    if (invalidCardName() === false){
-        cardNameInputElement.classList.toggle('invalid-input')
-    }
-    //como se añade un texto
-    if (invalidCardNumber() === false){
-        cardNumberInputElement.classList.toggle('invalid-input')
-    }
+const putCardName = () => {
+  nameCard.textContent = cardNameInputElement.value.toUpperCase();
+};
+cardNameInputElement.addEventListener('input', putCardName);
 
-    if (validMonth() === false){
-        cardMMInputElement.classList.toggle('invalid-input')
-    }
-    
-
-}
-formElement.addEventListener('submit', validateForm)
+const putCardNumber = () => {
+  //como poner algo cuando está vacío
+  numberCard.textContent = cardNumberInputElement.value;
+};
+cardNumberInputElement.addEventListener('input', putCardNumber);
